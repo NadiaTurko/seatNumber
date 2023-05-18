@@ -1,18 +1,25 @@
-let seatNumber = prompt("Введіть номер місця, який вказаний в білеті");
+const seatNumber = prompt("Введіть номер місця, який вказаний в білеті");
+const mainPart = seatNumber > 0 && seatNumber < 37;
+const sidePart = seatNumber > 36 && seatNumber < 55;
+const getSeatNumber = seatNumber => (seatNumber % 2 === 0 ) ? "верхнім" : "нижнім";
+const getSideSeatNumber = seatNumber => (seatNumber % 2 === 0) ? "бічним верхнім" : "бічним нижнім";
+
 const getKupeNumber = function(seatNumber){
-    if(seatNumber > 0 && seatNumber < 37){
+    if(mainPart){
     return Math.round(++seatNumber/4);
 }
-    else if(seatNumber > 36 && seatNumber < 55){
-    return Math.floor(((55 - seatNumber)/2));
+    else if(sidePart){
+    return Math.round(((55 - seatNumber)/2));
     } 
 }
-const getSeatNumber = seatNumber => (seatNumber % 2 == 0 ) ? "верхнім" : "нижнім";
-const getSideSeatNumber = seatNumber => (seatNumber % 2 == 0) ? "бічним верхнім" : "бічним нижнім";
-if (seatNumber > 0 && seatNumber < 36){
-    alert (` Ваше місце номер ${seatNumber} є ${getSeatNumber(seatNumber)} в ${getKupeNumber(seatNumber)} купе`);
-} else if (seatNumber > 36 && seatNumber < 54){
-    alert (` Ваше місце номер ${seatNumber} є ${getSideSeatNumber(seatNumber)} в ${getKupeNumber(seatNumber)} купе`);
+
+const messageSeatNumber = function (seatNumber){ 
+    if (mainPart){
+    return alert (`Ваше місце номер ${seatNumber} є ${getSeatNumber(seatNumber)} в ${getKupeNumber(seatNumber)} купе`);
+} else if (sidePart){
+     return alert (`Ваше місце номер ${seatNumber} є ${getSideSeatNumber(seatNumber)} в ${getKupeNumber(seatNumber)} купе`);
 } else{
-   alert("Ви вказали місце невірно");
+    return alert("Ви вказали місце невірно");
 };
+}
+const resultSeatNumber = messageSeatNumber(seatNumber);
